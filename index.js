@@ -1,4 +1,3 @@
-import http from 'http';
 import express from 'express';
 
 let data = [
@@ -154,11 +153,15 @@ let data = [
     }
   ]
 
-const app = http.createServer((req, res) => {
-    res.writeHead(200, {'Content-Type': 'application/json'});
-    res.end(JSON.stringify(data));
-})
+const app = express();
 
-const PORT = 3001;
-app.listen(PORT);
-console.log(`Server running on port ${PORT}`);
+
+app.get('/', function (req, res) {
+    res.type('json')
+    res.send(JSON.stringify(data));
+  });
+
+let port = process.env.PORT || 3002;
+app.listen(port, () => {
+    console.log(`Server running on port ${port}`);
+})
