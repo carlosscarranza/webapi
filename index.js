@@ -155,6 +155,7 @@ let data = [
 
 const app = express();
 
+app.use(cors());
 
 app.get('/', function (req, res) {
     res.type('json')
